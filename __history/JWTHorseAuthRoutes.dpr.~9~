@@ -1,0 +1,19 @@
+program JWTHorseAuthRoutes;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses Horse, Horse.JWT;
+
+begin
+  THorse.Use(HorseJWT('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTb2Z0d2FyZSBIb3VzZSBMVERBIiwic3ViIjoiSmVzdXMgQ29yZG92YSAiLCJleHAiOjE2NzM0MDEzOTcsIm5vbWJyZSI6Ikplc1x1MDBGQXMgQ1x1MDBGM3Jkb3ZhIiwibXZwIjp0cnVlfQ.m1D7gP0NFbobziGUihLya9_ylRGF0ci6HQyUuM1musw'));
+
+  THorse.Post('ping',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    begin
+      Res.Send('pong');
+    end);
+
+  THorse.Listen(9001);
+end.
